@@ -7,3 +7,6 @@ class Song(models.Model):
   artist = models.CharField(max_length=100)
   date = models.IntegerField()
 
+  def __str__(self):
+    return self.name
+
