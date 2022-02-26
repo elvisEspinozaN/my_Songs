@@ -19,12 +19,15 @@
         <div class="nav-wrapper">
           <ul>
             <li>
-              <a href="/" class="left brand-logo">&nbsp;&nbsp;mySongs</a>
+              <a href="{% url 'home' %}" class="left brand-logo"
+                >&nbsp;&nbsp;mySongs</a
+              >
             </li>
           </ul>
           <ul class="right">
-            <li><a href="/about">About</a></li>
-            <li><a href="/songs">View My Songs</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'songs_create' %}">Add A Song</a></li>
+            <li><a href="{% url 'index' %}">View My Songs</a></li>
           </ul>
         </div>
       </nav>

@@ -2,6 +2,7 @@
 from django.shortcuts import render
 # this is just http responses into dom
 from django.http import HttpResponse
+from django.views.generic.edit import CreateView
 from .models import Song
 
 # Create your views here.
@@ -14,3 +15,11 @@ def about(request):
 def songs_index(request):
   songs = Song.objects.all()
   return render(request, 'songs/index.html', {'songs': songs})
+
+def songs_detail(request, song_id):
+  song = Song.objects.get(id=song_id)
+  return render(request, 'songs/detail.html', {'song': song})
+
+class SongCreate(CreateView):
+  model = Song
+  fields = '__all__' # this provides all of the fields available
