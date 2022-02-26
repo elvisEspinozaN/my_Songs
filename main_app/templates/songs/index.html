@@ -1,0 +1,17 @@
+{% extends 'base.html' %}{% block content %}
+<h1>Song List</h1>
+
+{% for song in songs %}
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ song.name }}</span>
+    <p>Artist: {{ song.artist }}</p>
+    <p>Genre: {{ song.genre }}</p>
+    {% if song.date < 2021 %}
+    <p>Released: {{ song.date }}</p>
+    {% else %}
+    <p>Released: New</p>
+    {% endif %}
+  </div>
+</div>
+{% endfor %} {% endblock%}
