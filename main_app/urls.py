@@ -14,4 +14,5 @@ urlpatterns = [
   path('about/', views.about, name='about'),
   path('songs/', views.songs_index, name='index'),
   path('songs/<int:song_id>/', views.songs_detail, name='detail'),
+  path('songs/create/', views.SongCreate.as_view(), name='songs_create'),
 ]
