@@ -1,6 +1,14 @@
 {% extends 'base.html' %}{% block content %}
 <h1>Add a new song</h1>
 
-<form action="" method="POST">{{form}}</form>
+<form action="" method="POST">
+  <!-- special token genrated by django -->
+  {% csrf_token%} {{form}}
+  <input
+    class="waves-effect waves-light btn-small blue-grey lighten-1"
+    type="submit"
+    value="Add Song"
+  />
+</form>
 
 {% endblock%}
