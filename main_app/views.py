@@ -2,7 +2,7 @@
 from django.shortcuts import render
 # this is just http responses into dom
 from django.http import HttpResponse
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Song
 
 # Create your views here.
@@ -23,3 +23,11 @@ def songs_detail(request, song_id):
 class SongCreate(CreateView):
   model = Song
   fields = '__all__' # this provides all of the fields available
+
+class SongUpdate(UpdateView):
+  model = Song
+  fields = ('name', 'genre', 'artist', 'date')
+
+class SongDelete(DeleteView):
+  model = Song
+  success_url = '/songs/'
