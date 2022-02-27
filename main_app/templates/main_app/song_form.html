@@ -3,7 +3,10 @@
 
 <form action="" method="POST">
   <!-- special token genrated by django -->
-  {% csrf_token%} {{form}}
+  {% csrf_token%}
+  <table>
+    {{form.as_table}}
+  </table>
   <input
     class="waves-effect waves-light btn-small blue-grey lighten-1"
     type="submit"
