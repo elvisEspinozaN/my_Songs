@@ -1,0 +1,16 @@
+{% extends 'base.html' %}{% block content %}
+<h2>These are your categories</h2>
+
+{% for category in obect_list %}
+<div class="card">
+  <a href="{% url 'categories_detail' category.id }">
+    <div class="card-content">
+      <span class="card-title"
+        >A
+        <span class="{{category.color.lower}}-text"></span
+        >{{category.name}}</span
+      >
+    </div>
+  </a>
+</div>
+{% endfor %} {% endblock%}
