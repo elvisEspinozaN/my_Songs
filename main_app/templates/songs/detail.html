@@ -1,17 +1,19 @@
 {% extends 'base.html' %}{% block content %}
 <h1>Song Detail</h1>
 <div class="card">
-  <a href="/songs/{{song.id}}">
-    <div class="card-content">
-      <span class="card-title">{{ song.name }}</span>
-      <p>Artist: {{ song.artist }}</p>
-      <p>Genre: {{ song.genre }}</p>
-      {% if song.date < 2021 %}
-      <p>Released: {{ song.date }}</p>
-      {% else %}
-      <p>Released: New</p>
-      {% endif %}
-    </div>
-  </a>
+  <div class="card-content">
+    <span class="card-title">{{ song.name }}</span>
+    <p>Artist: {{ song.artist }}</p>
+    <p>Genre: {{ song.genre }}</p>
+    {% if song.date < 2021 %}
+    <p>Released: {{ song.date }}</p>
+    {% else %}
+    <p>Released: New</p>
+    {% endif %}
+  </div>
+  <div class="card-action">
+    <a href="{% url 'songs_update' song.id %}">Edit</a>
+    <a href="{% url 'songs_delete' song.id %}">Delete</a>
+  </div>
 </div>
 {% endblock%}
