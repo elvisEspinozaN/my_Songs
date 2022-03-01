@@ -1,7 +1,7 @@
 {% extends 'base.html' %}{% block content %}
 <h2>These are your categories</h2>
 
-{% for category in obect_list %}
+{% for category in object_list %}
 <div class="card">
   <a href="{% url 'categories_detail' category.id }">
     <div class="card-content">

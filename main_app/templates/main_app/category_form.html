@@ -1,0 +1,27 @@
+{% extends 'base.html' %}{% block content %} {% if object %}
+<h2>Update {{object.name}}</h2>
+{% else %}
+<h2>Add Category</h2>
+{% endif %}
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <table>
+    {{form.as_table}}
+  </table>
+  <input
+    type="submit"
+    class="waves-effect waves-light btn-small"
+    value="{% if object %} Update Toy {% else %} Add Toy {% endif %}"
+  />
+  {% if object %}
+  <a
+    class="waves-effect waves-light btn-small red"
+    href="{% url 'detail' object.id %}"
+    >Cancel</a
+  >
+  {% else %}
+  <a class="waves-effect btn-small red" href="{% url 'home' %}">Cancel</a>
+  {% endif %}
+</form>
+{% endblock %}
