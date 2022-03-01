@@ -3,7 +3,9 @@ from django.shortcuts import render
 # this is just http responses into dom
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Song
+from django.views.generic.detail import DetailView
+from django.views.generic import ListView
+from .models import Song, Category
 
 # Create your views here.
 def home(request):
@@ -31,3 +33,23 @@ class SongUpdate(UpdateView):
 class SongDelete(DeleteView):
   model = Song
   success_url = '/songs/'
+
+class CategoryCreate(CreateView):
+  model = Category
+  fields = ('name', 'color')
+
+class CategoryUpdate(UpdateView):
+  model = Category
+  fields = ('name', 'color')
+
+class CategoryDelete(DeleteView):
+  model = Category
+  success_url = '/categories/'
+
+class CategoryDetail(DetailView):
+  model = Category
+  template_name = 'categories/detail.html'
+
+class CategoryList(ListView):
+  model = Category
+  template_name = 'categories/index.html'
