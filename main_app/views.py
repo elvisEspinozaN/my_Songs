@@ -46,7 +46,7 @@ class CategoryDelete(DeleteView):
   model = Category
   success_url = '/categories/'
 
-class categoryDetail(DetailView):
+class CategoryDetail(DetailView):
   model = Category
   template_name = 'categories/detail.html'
 
