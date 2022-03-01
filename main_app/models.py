@@ -10,7 +10,7 @@ class Category(models.Model):
     return self.name
   
   def get_absolute_url(self):
-    return reverse('cetegory_detail', kwargs={'pk': self.id})
+    return reverse('categories_detail', kwargs={'pk': self.id})
 
 class Song(models.Model):
   name = models.CharField(max_length=100)
