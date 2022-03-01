@@ -1,10 +1,10 @@
 # renders to the dom or renders ourtemplates
-from pyexpat import model
-from re import template
 from django.shortcuts import render
 # this is just http responses into dom
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.detail import DetailView
+from django.views.generic import ListView
 from .models import Song, Category
 
 # Create your views here.
