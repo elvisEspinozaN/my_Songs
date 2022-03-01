@@ -1,9 +1,11 @@
 # renders to the dom or renders ourtemplates
+from pyexpat import model
+from re import template
 from django.shortcuts import render
 # this is just http responses into dom
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Song
+from .models import Song, Category
 
 # Create your views here.
 def home(request):
@@ -31,3 +33,23 @@ class SongUpdate(UpdateView):
 class SongDelete(DeleteView):
   model = Song
   success_url = '/songs/'
+
+class CategoryCreate(CreateView):
+  model = Category
+  fields = ('name', 'color')
+
+class CategoryUpdate(UpdateView):
+  model = Category
+  fields = ('name', 'color')
+
+class CategoryDelete(DeleteView):
+  model = Category
+  success_url = '/categories/'
+
+class categoryDetail(DetailView):
+  model = Category
+  template_name = 'categories/detail.html'
+
+class CategoryList(ListView):
+  model = Category
+  template_name = 'categories/index.html'
