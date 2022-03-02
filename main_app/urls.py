@@ -12,12 +12,14 @@ urlpatterns = [
   # home page
   path('', views.home, name='home'),
   path('about/', views.about, name='about'),
+ 
   path('songs/', views.songs_index, name='index'),
   path('songs/<int:song_id>/', views.songs_detail, name='detail'),
   path('songs/create/', views.SongCreate.as_view(), name='songs_create'),
   # has to take in pk - cos of db lookup
   path('songs/<int:pk>/update/', views.SongUpdate.as_view(), name='songs_update'),
   path('songs/<int:pk>/delete/', views.SongDelete.as_view(), name='songs_delete'),
+
   path('categories/', views.CategoryList.as_view(), name='categories_index'),
   path('categories/<int:pk>/', views.CategoryDetail.as_view(), name='categories_detail'),
   path('categories/create/', views.CategoryCreate.as_view(), name='categories_create'),
