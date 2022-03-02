@@ -33,7 +33,7 @@ class Song(models.Model):
     return reverse('detail', kwargs={'song_id': self.id})
 
 class Play(models.Model):
-  date = models.DateField()
+  p_date = models.DateField()
   time = models.CharField(max_length=1, choices=TIMES, default=TIMES[2][1])
   # common connection through foreign key
   # CASCADE -> all related instances deleted those w/relation
@@ -41,4 +41,4 @@ class Play(models.Model):
 
   def __str__(self):
     # get_< attr name >_display() is available due to attr = choices
-    return f"{self.get_time_display()} on {self.date}"
+    return f"{self.get_time_display()} on {self.p_date}"
