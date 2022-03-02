@@ -33,7 +33,7 @@ class Song(models.Model):
     return reverse('detail', kwargs={'song_id': self.id})
 
 class Playb(models.Model):
-  adate = models.DateField()
+  adate = models.DateField('playback date')
   atime = models.CharField(max_length=1, choices=DAYS, default=DAYS[0][0])
   # common connection through foreign key
   # CASCADE -> all related instances deleted those w/relation
