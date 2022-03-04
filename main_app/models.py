@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-DAYS = (
+PLAYS = (
   ('M', 'Morning'),
   ('A', 'Afternoon'),
   ('N', 'Night')
@@ -32,13 +32,12 @@ class Song(models.Model):
     # redirect created obj to the show page
     return reverse('detail', kwargs={'song_id': self.id})
 
-class Playb(models.Model):
-  adate = models.DateField('playback date')
-  atime = models.CharField(max_length=1, choices=DAYS, default=DAYS[0][0])
-  # common connection through foreign key
-  # CASCADE -> all related instances deleted those w/relation
-  asong = models.ForeignKey(Song, on_delete=models.CASCADE)
-
+class Playback(models.Model):
+  time = models.DateField('playback date')
+  play = models.CharField(max_length=1, choices=PLAYS, default=PLAYS[0][0])
+  # connection through FK
+  # CASCADE deletes related to data
+  song = models.ForeignKey(Song, on_delete=models.CASCADE)
+  
   def __str__(self):
-    # get_< attr name >_display() is available due to attr = choices
-    return f"{self.get_atime_display()} on {self.adate}"
+    return f"{self.get_play_display()} on {self.time}"
