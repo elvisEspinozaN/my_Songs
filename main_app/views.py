@@ -6,6 +6,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic import ListView
 from .models import Song, Category
+from .forms import PlaybackForm
 
 # Create your views here.
 def home(request):
@@ -20,7 +21,8 @@ def songs_index(request):
 
 def songs_detail(request, song_id):
   song = Song.objects.get(id=song_id)
-  return render(request, 'songs/detail.html', {'song': song})
+  playback_form = PlaybackForm()
+  return render(request, 'songs/detail.html', {'song': song, 'playback_form': playback_form})
 
 class SongCreate(CreateView):
   model = Song
