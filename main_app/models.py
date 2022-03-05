@@ -41,3 +41,6 @@ class Playback(models.Model):
   
   def __str__(self):
     return f"{self.get_play_display()} on {self.time}"
+
+  class Meta:
+    ordering = ('-time',)
