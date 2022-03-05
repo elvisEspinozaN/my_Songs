@@ -33,8 +33,8 @@ class Song(models.Model):
     # redirect created obj to the show page
     return reverse('detail', kwargs={'song_id': self.id})
 
-  def play_for_today(self):
-    return self.playback_set.filter(date=date.today()).count() >= len(PLAYS)
+  def playback_for_today(self):
+    return self.playback_set.filter(time=date.today()).count() >= len(PLAYS)
 
 class Playback(models.Model):
   time = models.DateField('playback date')

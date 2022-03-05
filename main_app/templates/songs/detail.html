@@ -29,6 +29,16 @@
         class="waves-effect waves-light btn-small"
       />
     </form>
+    <br />
+    {% if song.playback_for_today %}
+    <div class="card-panel teal-text center-align">
+      {{song.name}} has been played all day!
+    </div>
+    {% else %}
+    <div class="card-panel red-text center-align">
+      {{song.name}} has not been played once today!
+    </div>
+    {% endif %}
     <table class="striped">
       <thead>
         <tr>
