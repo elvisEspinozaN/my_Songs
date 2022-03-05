@@ -1,5 +1,5 @@
 # renders to the dom or renders ourtemplates
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 # this is just http responses into dom
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -23,6 +23,20 @@ def songs_detail(request, song_id):
   song = Song.objects.get(id=song_id)
   playback_form = PlaybackForm()
   return render(request, 'songs/detail.html', {'song': song, 'playback_form': playback_form})
+
+def add_playback(request, song_id):
+  # collect form inp vals
+  form = PlaybackForm(request.POST)
+  # valid inp vals
+  if form.is_valid():
+    # save copy of new playback inst
+    new_playback = form.save(commit=False)
+    # attach a ref to obj that owns playback
+    new_playback.song_id = song_id
+    # save playback to db
+    new_playback.save()
+  # redirect to details pg
+  return redirect('detail', song_id=song_id)
 
 class SongCreate(CreateView):
   model = Song
