@@ -19,6 +19,7 @@ urlpatterns = [
   # has to take in pk - cos of db lookup
   path('songs/<int:pk>/update/', views.SongUpdate.as_view(), name='songs_update'),
   path('songs/<int:pk>/delete/', views.SongDelete.as_view(), name='songs_delete'),
+  path('songs/<int:song_id>/add_playback/', views.add_playback, name='add_playback'),
 
   path('categories/', views.CategoryList.as_view(), name='categories_index'),
   path('categories/<int:pk>/', views.CategoryDetail.as_view(), name='categories_detail'),
