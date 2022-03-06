@@ -22,7 +22,16 @@ def songs_index(request):
 def songs_detail(request, song_id):
   song = Song.objects.get(id=song_id)
   playback_form = PlaybackForm()
-  return render(request, 'songs/detail.html', {'song': song, 'playback_form': playback_form})
+  
+  # looking up field lookup => 'id'
+  # we're getting eveything thst doesn't belong to this song
+  categories_song_doesnt_have = Category.objects.exclude(id__in = song.categories.all().values_list('id'))
+
+  return render(request, 'songs/detail.html', {
+    'song': song,
+    'playback_form': playback_form,
+    'categories': categories_song_doesnt_have
+  })
 
 def add_playback(request, song_id):
   # collect form inp vals

@@ -29,6 +29,16 @@
         class="waves-effect waves-light btn-small"
       />
     </form>
+    <br />
+    {% if song.playback_for_today %}
+    <div class="card-panel teal-text center-align">
+      {{song.name}} has been played all day!
+    </div>
+    {% else %}
+    <div class="card-panel red-text center-align">
+      {{song.name}} has not been played once today!
+    </div>
+    {% endif %}
     <table class="striped">
       <thead>
         <tr>
@@ -47,4 +57,26 @@
     </table>
   </div>
 </div>
+
+<hr />
+
+<div class="row">
+  <div class="col s6">
+    <h4>Categories</h4>
+    {% if song.categories.count %} {% for category in song.categories.all %}
+    <div class="card">
+      <div class="card-content">
+        <span class="crad-title">
+          You
+          <span class="{{category.color.lower}}-text">{{category.name}}d</span>
+          {{song.name}}
+        </span>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <p>No available categories at the time</p>
+    {% endif %}
+  </div>
+</div>
+
 {% endblock%}

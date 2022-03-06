@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
 
 PLAYS = (
   ('M', 'Morning'),
@@ -23,6 +24,7 @@ class Song(models.Model):
   genre = models.CharField(max_length=100)
   artist = models.CharField(max_length=100)
   date = models.IntegerField()
+  categories = models.ManyToManyField(Category)
 
   def __str__(self):
     return self.name
@@ -31,6 +33,9 @@ class Song(models.Model):
     # a reverese look up
     # redirect created obj to the show page
     return reverse('detail', kwargs={'song_id': self.id})
+
+  def playback_for_today(self):
+    return self.playback_set.filter(time=date.today()).count() >= len(PLAYS)
 
 class Playback(models.Model):
   time = models.DateField('playback date')
@@ -41,3 +46,6 @@ class Playback(models.Model):
   
   def __str__(self):
     return f"{self.get_play_display()} on {self.time}"
+
+  class Meta:
+    ordering = ('-time',)
