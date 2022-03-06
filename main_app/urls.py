@@ -28,4 +28,5 @@ urlpatterns = [
   path('categories/<int:pk>/delete/', views.CategoryDelete.as_view(), name='categories_delete'),
   
   path('songs/<int:song_id>/assoc_category/<int:category_id>/', views.assoc_category, name='assoc_category'),
+  path('songs/<int:song_id>/delete_assoc_category/<int:category_id>/', views.delete_assoc_category, name='delete_assoc_category'),
 ]
