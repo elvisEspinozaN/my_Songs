@@ -87,7 +87,10 @@
         </span>
       </div>
       <div class="card-action">
-        <form action="" method="POST">
+        <form
+          action="{% url 'assoc_category' song.id category.id %}"
+          method="POST"
+        >
           {% csrf_token %}
           <button
             type="submit"
