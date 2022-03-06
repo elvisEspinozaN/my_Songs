@@ -57,7 +57,7 @@ def delete_assoc_category(request, song_id, category_id):
 
 class SongCreate(CreateView):
   model = Song
-  fields = '__all__' # this provides all of the fields available
+  fields = ('name', 'genre', 'artist', 'date') # this provides all of the fields available
 
 class SongUpdate(UpdateView):
   model = Song
