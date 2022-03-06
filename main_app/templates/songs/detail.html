@@ -77,6 +77,31 @@
     <p>No available categories at the time</p>
     {% endif %}
   </div>
+  <div class="col s6">
+    <h4>Available Categories</h4>
+    {% if categories.count %} {% for category in categories %}
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">
+          <span class="{{category.color.low}}-text">{{category.name}}</span>
+        </span>
+      </div>
+      <div class="card-action">
+        <form action="" method="POST">
+          {% csrf_token %}
+          <button
+            type="submit"
+            class="waves-effect waves-light btn green lighten-1 btn-small"
+          >
+            Add
+          </button>
+        </form>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <p>{{song.name}} has all available categories</p>
+    {% endif %}
+  </div>
 </div>
 
 {% endblock%}
