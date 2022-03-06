@@ -51,6 +51,10 @@ def assoc_category(request, song_id, category_id):
   Song.objects.get(id=song_id).categories.add(category_id)
   return redirect('detail', song_id=song_id)
 
+def delete_assoc_category(request, song_id, category_id):
+  Song.objects.get(id=song_id).categories.remove(category_id)
+  return redirect('detail', song_id=song_id)
+
 class SongCreate(CreateView):
   model = Song
   fields = '__all__' # this provides all of the fields available
