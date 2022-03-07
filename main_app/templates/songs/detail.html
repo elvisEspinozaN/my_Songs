@@ -71,10 +71,51 @@
           <span class="{{category.color.lower}}-text">{{category.name}}d</span>
           {{song.name}}
         </span>
+        <div class="card-action">
+          <form
+            action="{% url 'delete_assoc_category' song.id category.id %}"
+            method="POST"
+          >
+            {% csrf_token %}
+            <input
+              type="submit"
+              value="remove"
+              class="waves-effect waves-light btn red lighten-1 btn-small"
+            />
+          </form>
+        </div>
       </div>
     </div>
     {% endfor %} {% else %}
     <p>No available categories at the time</p>
+    {% endif %}
+  </div>
+  <div class="col s6">
+    <h4>Available Categories</h4>
+    {% if categories.count %} {% for category in categories %}
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">
+          <span class="{{category.color.lower}}-text">{{category.name}}</span>
+        </span>
+      </div>
+      <div class="card-action">
+        <form
+          action="{% url 'assoc_category' song.id category.id %}"
+          method="POST"
+        >
+          {% csrf_token %}
+          <button
+            type="submit"
+            class="waves-effect waves-light btn green lighten-1 btn-small"
+          >
+            Add
+          </button>
+        </form>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <p>{{song.name}} has all available categories</p>
     {% endif %}
   </div>
 </div>
