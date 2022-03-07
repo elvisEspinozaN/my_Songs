@@ -1,5 +1,24 @@
 {% extends 'base.html' %}{% block content %}
-<h1>mySongs</h1>
-<hr />
-<p>Home Page</p>
+<section class="home_lp">
+  <div class="home_lp__text">
+    <div class="home_lp__header">
+      <h3>mySongs - a collection</h3>
+      <i class="material-icons">library_music</i>
+    </div>
+    <p>
+      A collection of your favorite songs! Using Python with Django as a
+      framework. A functional application that renders a list of songs from a
+      Postgresql database and full CRUD implementation! Add Your Songs!
+    </p>
+    <div class="home_arrow">
+      <a href="{% url 'songs_create' %}" class="arrow__item">></a>
+    </div>
+  </div>
+
+  <div class="home_lp__stripe">
+    <div class="stripes"></div>
+    <div class="stripes"></div>
+    <div class="stripes"></div>
+  </div>
+</section>
 {% endblock%}
