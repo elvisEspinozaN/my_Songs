@@ -5,8 +5,14 @@ from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic import ListView
-from .models import Song, Category
+from .models import Song, Category, Photo
 from .forms import PlaybackForm
+
+import boto3
+import uuid
+
+S3_BASE_URL= 'https://s3.us-east-1.amazonaws.com/'
+BUCKET = 'mysongs-eecn'
 
 # Create your views here.
 def home(request):
@@ -53,6 +59,39 @@ def assoc_category(request, song_id, category_id):
 
 def delete_assoc_category(request, song_id, category_id):
   Song.objects.get(id=song_id).categories.remove(category_id)
+  return redirect('detail', song_id=song_id)
+
+def add_photo(request, song_id):
+  # collect photo info - form submission
+  """
+    <input type='file' name='photo-file' />
+  """
+  photo_file = request.FILES.get('photo-file')
+  # if statement to see if photo info is present
+  if photo_file:
+    # if photo present
+    s3 = boto3.client('s3')
+    # init ref to s3 service from boto3
+    """
+      random_img.png => abcc6a.png
+    """
+    # unique name for photo asset
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    # attempt to upload to aws s3
+    try:
+      s3.upload_fileobj(photo_file, BUCKET. key)
+      # save secure url to aws s3 hosted photo asset to db
+      url = f"{S3_BASE_URL}{BUCKET}/{key}"
+      photo = Photo(url=url, song_id=song_id)
+      photo.save()
+      # if upload unsuccesful
+    except Exception as error:
+      print('***************************************')
+      print('An error occurred while uploading to S3')
+      print(error)
+      print('***************************************')
+      # print err to console
+  # return a response as a redirect ot the client - redirecting to detail page
   return redirect('detail', song_id=song_id)
 
 class SongCreate(CreateView):
