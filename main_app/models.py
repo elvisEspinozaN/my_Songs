@@ -49,3 +49,10 @@ class Playback(models.Model):
 
   class Meta:
     ordering = ('-time',)
+
+class Photo(models.Model):
+  url = models.CharField(max_length=200)
+  song = models.ForeignKey(Song, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return f"Photo for song_id: {self.song_id} @{self.url}"
