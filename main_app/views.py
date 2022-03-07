@@ -66,7 +66,7 @@ def add_photo(request, song_id):
   """
     <input type='file' name='photo-file' />
   """
-  photo_file = request.FILES.get('photo-file')
+  photo_file = request.FILES.get('photo-file', None)
   # if statement to see if photo info is present
   if photo_file:
     # if photo present
@@ -79,7 +79,7 @@ def add_photo(request, song_id):
     key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
     # attempt to upload to aws s3
     try:
-      s3.upload_fileobj(photo_file, BUCKET. key)
+      s3.upload_fileobj(photo_file, BUCKET, key)
       # save secure url to aws s3 hosted photo asset to db
       url = f"{S3_BASE_URL}{BUCKET}/{key}"
       photo = Photo(url=url, song_id=song_id)
